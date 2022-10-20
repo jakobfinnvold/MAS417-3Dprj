@@ -4,11 +4,11 @@ import pandas as pd
 
 client_id = 'bcfc74f6-c102-4435-8c22-d65236a14074'
 
-# ID for grimstad -> SN38140
+# ID for Grimstad -> SN38140
 endpoint = 'https://frost.met.no/observations/v0.jsonld'
 parameters = {
     'sources' : 'SN38140',
-    'elements' : 'mean(air_temperature P1D)',
+    'elements' : 'sum(precipitation_amount P1D)',
     'referencetime' : '2010-10-09',
 }
 
