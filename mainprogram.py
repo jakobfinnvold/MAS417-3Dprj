@@ -4,12 +4,12 @@ import pandas as pd
 
 client_id = 'bcfc74f6-c102-4435-8c22-d65236a14074'
 
-# ID for Grimstad -> SN38140
+# ID for Grimstad -> SN38140 | Krs SN39210
 endpoint = 'https://frost.met.no/observations/v0.jsonld'
 parameters = {
-    'sources' : 'SN38140',
-    'elements' : 'sum(precipitation_amount P1D)',
-    'referencetime' : '2010-10-09',
+    'sources' : 'SN18700',
+    'elements' : 'over_time(weather_cloud_symbol PT6H)',
+    'referencetime' : '1966-06-06T12',
 }
 
 r = requests.get(endpoint, parameters, auth=(client_id, ''))
@@ -24,12 +24,8 @@ else:
     print('Message: %s' % json['error']['message'])
     print('Reason: %s' % json['error']['reason'])
 
-df = pd.DataFrame()
-for i in range(len(data)):
-    row = pd.DataFrame(data[i]['observations'])
-    row['referenceTime'] = data[i]['referenceTime']
-    row['sourceId'] = data[i]['sourceId']
-    df = df.append(row)
 
-df = df.reset_index()
-df.head()
+f = open('Weatherdata.txt', 'w')
+f.write(r.text)
+f.close()
+
