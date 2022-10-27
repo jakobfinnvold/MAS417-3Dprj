@@ -17,11 +17,6 @@ class WeatherLocation:
     def __str__(self):
         return f'Location: {self.location}, Latitude: {self.latitude}, Longitude: {self.longitude}'
 
-    def set_location(self):
-        self.location = input("Enter desired location: ")
-
-    def get_location(self):
-        print("Location set to", {self.location})
 
     def acquire_location(self):
 
@@ -40,39 +35,18 @@ class WeatherLocation:
             f = open("WeatherLocation.txt", 'w')
             f.write(request.text)
             f.close()
-            self.latitude = data[0]["geometry"]["coordinates"][1]
-            self.longitude = data[0]["geometry"]["coordinates"][0]
+
         else:
             print('Error! Returned status code %s' % request.status_code)
             print('Message: %s' % json['error']['message'])
             print('Reason: %s' % json['error']['reason'])
 
 
-    def weather(self):
-
-        latitude = self.latitude
-        longitude = self.longitude
-
-        client_id = 'bcfc74f6-c102-4435-8c22-d65236a14074'
-        endpoint = f'https://api.met.no/weatherapi/locationforecast/2.0/compact?lat={latitude}&lon={longitude}'
-
-        request = rq.request(endpoint, auth=(client_id, ''))
-
-        json = request.json()
-
-        if request.status_code == 200:
-            data = json['data']
-            print('Data retrieved from frost.met.no!')
-            f = open("WeatherAtLocation.txt", 'w')
-            f.write(request.text)
-            f.close()
-        else:
-            print('Error! Returned status code %s' % request.status_code)
-            print('Message: %s' % json['error']['message'])
-            print('Reason: %s' % json['error']['reason'])
+        self.latitude = data[0]["geometry"]["coordinates"][1]
+        self.longitude = data[0]["geometry"]["coordinates"][0]
+        print(self.longitude, self.latitude)
 
 
-pass
 
 
 
