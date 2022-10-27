@@ -1,12 +1,16 @@
+import numpy as np
 import requests as rq
 # This class is based on the tutorial from met.no located here: https://frost.met.no/python_example.html The correct
-# locations in the API are used instead of observations, as we can get the weather from the locations API alone
+# locations in the API will be used to provide latitude and longitude to the weatherAPI to retrieve a forecast
 
 
 class WeatherLocation:
 
-    def __init__(self, location):
+    def __init__(self, location, latitude, longitude):
         self.location = location
+        self.latitude = latitude
+        self.longitude = longitude
+
 
     # Printing the chosen location to confirm that we have a valid one
     def __str__(self):
@@ -37,11 +41,14 @@ class WeatherLocation:
             print('Reason: %s' % json['error']['reason'])
 
 
-        self.latitude = data[0]["geometry"]["coordinates"][1]
-        self.longitude = data[0]["geometry"]["coordinates"][0]
-        print(self.longitude, self.latitude)
+        self.latitude = [data[0]["geometry"]["coordinates"][1]]
+        self.longitude = [data[0]["geometry"]["coordinates"][0]]
+
+        print(self.latitude, self.longitude)
 
 
 
+
+pass
 
 

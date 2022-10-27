@@ -6,15 +6,13 @@ from getLocation import WeatherLocation
 # along with this guide https://stackoverflow.com/questions/10606133/sending-user-agent-using-requests-library-in-python
 
 
-class WeatherSymbol:
-
-    def __init__(self, latitude, longitude):
-        self.latitude = latitude
-        self.longitude = longitude
+class WeatherSymbol(WeatherLocation):
 
     def get_weather_data(self):
+        latitude = str(self.latitude)
+        longitude = str(self.longitude)
 
-        endpoint = f'https://api.met.no/weatherapi/locationforecast/2.0/compact?lat={self.latitude}&lon={self.longitude}'
+        endpoint = f'https://api.met.no/weatherapi/locationforecast/2.0/compact.json?lat={self.latitude}&lon={self.longitude}'
 
         headers = {
             'User-Agent': "User 1",
@@ -26,7 +24,7 @@ class WeatherSymbol:
         json = request.json()
 
         if request.status_code == 200:
-            data = json['data']
+            data = json["timeseries"]["data"]
             print('Data retrieved from frost.met.no!')
             f = open("WeatherForecast.txt", 'w')
             f.write(request.text)
@@ -38,5 +36,5 @@ class WeatherSymbol:
             print('Reason: %s' % json['error']['reason'])
 
 
-
+        self.wsymbol = data["next_12_hours"]["summary"]["symbol_code"]
 
