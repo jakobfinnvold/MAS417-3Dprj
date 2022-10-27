@@ -8,11 +8,6 @@ class WeatherLocation:
     def __init__(self, location):
         self.location = location
 
-
-    # Inputs needed to find location, altitude can be excluded as it is not required
-    latitude = 0
-    longitude = 0
-
     # Printing the chosen location to confirm that we have a valid one
     def __str__(self):
         return f'Location: {self.location}, Latitude: {self.latitude}, Longitude: {self.longitude}'
