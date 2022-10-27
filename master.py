@@ -1,26 +1,23 @@
-import re
+import requests as rq
 import time
-from getLocation import WeatherLocation
-from getWeather import WeatherSymbol
+from getLocationandWeather import WeatherSymbol
 
-# Initializing the variables to go to WeatherLocation
-longitude = 0
-latitude = 0
+location = input("Enter your desired location!: ")
 
-def main():
+my_location = WeatherSymbol(location)
 
-    location = input("Enter your desired location!: ")
-
-    my_location = WeatherLocation(location, latitude, longitude)
-    my_weather = WeatherSymbol(location, latitude, longitude)
-
-    print(my_location.acquire_location())
-    print(my_weather.get_weather_data())
+print(my_location.get_weather_symbol(), type(my_location))
 
 
 
-if __name__=="__main__":
-    main()
+
+
+
+
+
+
+
+
 
 
 
