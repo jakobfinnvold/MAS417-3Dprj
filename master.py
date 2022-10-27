@@ -5,10 +5,11 @@ from getLocationandWeather import WeatherSymbol
 location = input("Enter your desired location!: ")
 
 my_location = WeatherSymbol(location)
+print(my_location.get_weather_symbol())
 
-print(my_location.get_weather_symbol(), type(my_location))
-
-
+with open("WeatherSymbol.txt") as f:
+    symbol = f.readlines()
+    print(symbol)
 
 
 

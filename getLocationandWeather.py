@@ -63,7 +63,6 @@ class WeatherSymbol:
             data = json['properties']['timeseries'][00]['data']['next_6_hours']['summary']['symbol_code']
             print('Data retrieved from frost.met.no!')
             self.wsymbol = data[0:100]  # Large buffer to get the whole string
-            print(self.wsymbol)
             f = open("WeatherSymbol.txt", 'w')  # Writing symbol string to a textfile that can be read when creating.stl
             f.write(self.wsymbol)
             f.close()
@@ -74,3 +73,4 @@ class WeatherSymbol:
             print('Message: %s' % json['error']['message'])
             print('Reason: %s' % json['error']['reason'])
 
+        return f'{self.location} will be {self.wsymbol} for the next 6 hours'
