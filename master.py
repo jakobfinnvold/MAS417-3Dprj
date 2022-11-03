@@ -11,9 +11,11 @@ init_weather = my_location.acquire_location() # Initiate the first function to g
 time.sleep(1)
 print(my_location.get_weather_symbol()) # Printing the forecast
 
-my_stl = STL(location)
-my_file = my_stl.symbol_mesh()
-my_cube = my_stl.bottom_mesh()
+my_stl = STL(location) # Initializing the STL class
+my_cube = my_stl.bottom_mesh() # Running the function to create bottom plate stl file
+my_symbol = my_stl.symbol_mesh() # Running the function to create symbol stl file
+my_final_file = my_stl.mergeSTL() # Run the function to merge the bottom plate and symbol stl files
+
 
 
 

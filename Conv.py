@@ -1,6 +1,7 @@
 import numpy as np
 from stl import mesh
 from PIL import Image
+import  stl
 
 class STL:
 
@@ -43,8 +44,8 @@ class STL:
             for j in range(3):
                 shape.vectors[i][j] = verticies[f[j], :]
 
-        shape.save("cube.stl")
-        print(shape)
+        self.bottomstl = shape.save("bottom.stl")
+
 
     def symbol_mesh(self):
 
@@ -68,7 +69,6 @@ class STL:
         img.thumbnail(max_size)
         numImg = np.array(img)
         maxPixels = numImg.max()
-        minPixels = numImg.min()
 
         (columns, rows) = img.size
 
@@ -101,7 +101,6 @@ class STL:
                 faces.append(face1)
                 faces.append(face2)
 
-        print(f"Number of faces:  {len(faces)}")
         facesNum = np.array(faces)
 
         # Creating mesh
@@ -111,8 +110,19 @@ class STL:
                 surface.vectors[i][j] = facesNum[i][j]
 
         # Write mesh to file
-        surface.save('symbol.stl')
-        print(surface)
+        self.surfacestl = surface.save('symbol.stl')
+
+
+    def mergeSTL(self):
+        file_one = mesh.Mesh.from_file('./bottom.stl')
+        file_two = mesh.Mesh.from_file('./symbol.stl')
+
+        combined = mesh.Mesh(np.concatenate([file_one.data, file_two.data]))
+        combined.save('merged.stl', mode=stl.Mode.ASCII)
+
+        print('STL file complete! "merged.stl is the final product ready for 3D printing!')
+        print('Check the project folder to find your file!')
+
 
 
 
