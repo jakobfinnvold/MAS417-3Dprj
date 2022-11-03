@@ -1,1 +1,0 @@
-print("Det er meldt yr i grimstad")
