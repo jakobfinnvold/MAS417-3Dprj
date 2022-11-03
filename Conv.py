@@ -1,14 +1,15 @@
 import numpy as np
 from stl import mesh
 from PIL import Image
-import  stl
+import stl
+
 
 class STL:
 
     def __init__(self, location):
         self.location = location
 
-    def bottom_mesh(self):
+    def bottom_mesh(self): # Creating a basic cube, with same length and width as png file. Height is smaller (3mm).
         verticies = np.array([ \
             [0, 0, 3],
             [0, 100, 3],
@@ -36,7 +37,7 @@ class STL:
             [0, 7, 3],
 
             [2, 3, 2],
-            [2, 3, 3]])
+            [2, 3, 3]]) # Creating the 12 triangles for the cube, so that we can mesh it
 
         shape = mesh.Mesh(np.zeros(faces.shape[0], dtype=mesh.Mesh.dtype))
 
@@ -53,15 +54,15 @@ class STL:
             symbol = f.readline()
             f.close()
 
-        weather_symbol = f'./png/{symbol}.png'
+        weather_symbol = f'./png/{symbol}.png' # Using the line that was read from the txt file to load correct png
 
         # Open image and convert to grey scale
         try:
-            img = Image.open(weather_symbol).convert('L')
+            img = Image.open(weather_symbol).convert('L') # L is the conversion from RGB to grey
         except IOError:
             print("Error Importing Image")
 
-        # Creating 2D shape of the image
+        # Creating 2D shape of the image. LengthxWidth = 100 x 100 mm, max height is 1 cm
         max_size = (100, 100)
         max_height = 10
         min_height = 0

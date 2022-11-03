@@ -1,6 +1,4 @@
-import requests as rq
 import time
-from PIL import Image
 from getLocationandWeather import WeatherSymbol
 from Conv import STL
 
