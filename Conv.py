@@ -36,8 +36,8 @@ class STL:
             [0, 4, 7],
             [0, 7, 3],
 
-            [2, 3, 2],
-            [2, 3, 3]]) # Creating the 12 triangles for the cube, so that we can mesh it
+            [4, 7, 6],
+            [4, 6, 5]]) # Creating the 12 triangles for the cube, so that we can mesh it
 
         shape = mesh.Mesh(np.zeros(faces.shape[0], dtype=mesh.Mesh.dtype))
 
