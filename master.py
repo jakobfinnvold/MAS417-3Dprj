@@ -4,11 +4,15 @@ from Conv import STL
 
 location = input("Enter your desired location!: ")
 
+# Get the location
 my_location = WeatherSymbol(location) # Send location to weather symbol class
 init_weather = my_location.acquire_location() # Initiate the first function to get weather data
 time.sleep(1)
-print(my_location.get_weather_symbol()) # Printing the forecast
+r = my_location.get_weather_symbol() # Getting the forecast symbol
+print(r) # Printing the forecast
 
+
+# Input symbol char length and merge the stl files
 my_stl = STL(location) # Initializing the STL class
 my_cube = my_stl.bottom_mesh() # Running the function to create bottom plate stl file
 my_symbol = my_stl.symbol_mesh() # Running the function to create symbol stl file

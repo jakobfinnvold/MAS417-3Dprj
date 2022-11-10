@@ -30,13 +30,11 @@ class WeatherSymbol:
         # Print error message if location is not valid/obtainable, #If ok, write to txt file to verify
         if request.status_code == 200:
             data = json['data'][00]['geometry']['coordinates']
-            #print('Data retrieved from frost.met.no!')
             f = open("WeatherLocation.txt", 'w')
             f.write(request.text)
             f.close()
             self.latitude = data[1]
             self.longitude = data[0]
-
 
 
         else:
@@ -61,10 +59,12 @@ class WeatherSymbol:
 
         if request.status_code == 200:
             data = json['properties']['timeseries'][00]['data']['next_6_hours']['summary']['symbol_code']
-            #print('Data retrieved from frost.met.no!')
+            data1 = json['properties']['timeseries'][00]['data']['instant']['details']['air_temperature']
             self.wsymbol = data[0:100]  # Large buffer to get the whole string
+            self.degrees = data1
             f = open("WeatherSymbol.txt", 'w')  # Writing symbol string to a textfile that can be read when creating.stl
-            f.write(self.wsymbol)
+            f.write(f'{self.wsymbol}')
+            f.write(f'{self.degrees}')
             f.close()
 
 
@@ -74,3 +74,4 @@ class WeatherSymbol:
             print('Reason: %s' % json['error']['reason'])
 
         return f'{self.location} will be {self.wsymbol} for the next 6 hours'
+
