@@ -30,14 +30,8 @@ class WeatherSymbol:
         # Print error message if location is not valid/obtainable, #If ok, write to txt file to verify
         if request.status_code == 200:
             data = json['data'][00]['geometry']['coordinates']
-            #print('Data retrieved from frost.met.no!')
-            f = open("WeatherLocation.txt", 'w')
-            f.write(request.text)
-            f.close()
             self.latitude = data[1]
             self.longitude = data[0]
-
-
 
         else:
             print('Error! Returned status code %s' % request.status_code)
@@ -64,8 +58,6 @@ class WeatherSymbol:
             data1 = json['properties']['timeseries'][00]['data']['instant']['details']['wind_speed']
             self.wsymbol = data[0:100]  # Making space for the larger symbol names
             self.speed = data1
-
-
 
         else:
             print('Error! Returned status code %s' % request.status_code)
